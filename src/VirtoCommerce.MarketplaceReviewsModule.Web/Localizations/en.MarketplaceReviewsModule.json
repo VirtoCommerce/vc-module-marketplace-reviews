@@ -1,0 +1,28 @@
+{
+  "MarketplaceReviewsModule": {
+    "blades": {
+      "hello-world": {
+        "title": "Hello world blade"
+      }
+    }
+  },
+  "permissions": {
+    "MarketplaceReviewsModule:access": "Open MarketplaceReviewsModule menu",
+    "MarketplaceReviewsModule:create": "Create MarketplaceReviewsModule related data",
+    "MarketplaceReviewsModule:read": "View MarketplaceReviewsModule related data",
+    "MarketplaceReviewsModule:update": "Update MarketplaceReviewsModule related data",
+    "MarketplaceReviewsModule:delete": "Delete MarketplaceReviewsModule related data"
+  },
+  "settings": {
+    "MarketplaceReviewsModule": {
+      "MarketplaceReviewsModuleEnabled": {
+        "title": "MarketplaceReviewsModule Enabled",
+        "description": "MarketplaceReviewsModule Enabled setting"
+      },
+      "MarketplaceReviewsModulePassword": {
+        "title": "MarketplaceReviewsModule Password",
+        "description": "MarketplaceReviewsModule Password setting"
+      }
+    }
+  }
+}

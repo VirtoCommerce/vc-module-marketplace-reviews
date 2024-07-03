@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<module>
+  <id>VirtoCommerce.MarketplaceReviews</id>
+  <version>3.800.0</version>
+  <version-tag></version-tag>
+
+  <platformVersion>3.825.0</platformVersion>
+  <dependencies>
+    <dependency id="VirtoCommerce.CustomerReviews" version="3.803.0" />
+    <dependency id="VirtoCommerce.MarketplaceVendor" version="3.814.0" />
+  </dependencies>
+
+  <title>VirtoCommerce MarketplaceReviews extension module</title>
+  <description>VirtoCommerce MarketplaceReviews extension module</description>
+
+  <authors>
+    <author>Vladimir Buravlev</author>
+  </authors>
+  <owners>
+    <owner>VirtoCommerce</owner>
+  </owners>
+
+  <projectUrl>https://github.com/VirtoCommerce/vc-module-marketplace-reviews</projectUrl>
+  <iconUrl>Modules/$(VirtoCommerce.MarketplaceReviews)/Content/logo.png</iconUrl>
+  <requireLicenseAcceptance>false</requireLicenseAcceptance>
+
+  <assemblyFile>VirtoCommerce.MarketplaceReviewsModule.Web.dll</assemblyFile>
+  <moduleType>VirtoCommerce.MarketplaceReviewsModule.Web.Module, VirtoCommerce.MarketplaceReviewsModule.Web</moduleType>
+
+  <releaseNotes>First version.</releaseNotes>
+  <copyright>Copyright © 2024 VirtoCommerce. All rights reserved</copyright>
+  <tags>Marketplace Reviews module</tags>
+  <useFullTypeNameInSwagger>false</useFullTypeNameInSwagger>
+</module>
