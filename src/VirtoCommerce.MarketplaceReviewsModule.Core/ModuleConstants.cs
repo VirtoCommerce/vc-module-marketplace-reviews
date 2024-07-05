@@ -6,11 +6,11 @@ public static class ModuleConstants
     {
         public static class Permissions
         {
-            public const string ManageSellerReviews = "seller:reviews:manage";
+            public const string AccessSellerReviews = "seller:reviews:access";
 
             public static string[] AllPermissions { get; } =
             {
-                ManageSellerReviews,
+                AccessSellerReviews,
             };
         }
     }

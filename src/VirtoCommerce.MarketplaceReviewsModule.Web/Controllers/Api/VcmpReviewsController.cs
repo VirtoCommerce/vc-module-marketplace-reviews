@@ -24,7 +24,7 @@ public class VcmpReviewsController : ControllerBase
     public async Task<ActionResult<SearchCustomerReviewsResult>> SearchCustomerReviews([FromBody] SearchCustomerReviewsQuery query)
     {
         var authorizationResult = await _authorizationService.AuthorizeAsync(User, query,
-            new SellerAuthorizationRequirement(Core.ModuleConstants.Security.Permissions.ManageSellerReviews));
+            new SellerAuthorizationRequirement(Core.ModuleConstants.Security.Permissions.AccessSellerReviews));
         if (!authorizationResult.Succeeded)
         {
             return Unauthorized();

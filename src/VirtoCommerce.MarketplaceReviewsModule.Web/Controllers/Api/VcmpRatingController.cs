@@ -27,7 +27,7 @@ public class VcmpRatingController : ControllerBase
     {
         var query = ExType<GetSellerRatingQuery>.New();
         var authorizationResult = await _authorizationService.AuthorizeAsync(User, query,
-            new SellerAuthorizationRequirement(Core.ModuleConstants.Security.Permissions.ManageSellerReviews));
+            new SellerAuthorizationRequirement(Core.ModuleConstants.Security.Permissions.AccessSellerReviews));
         if (!authorizationResult.Succeeded)
         {
             return Unauthorized();
@@ -45,7 +45,7 @@ public class VcmpRatingController : ControllerBase
         query.SellerId = sellerId;
 
         var authorizationResult = await _authorizationService.AuthorizeAsync(User, query,
-            new SellerAuthorizationRequirement(Core.ModuleConstants.Security.Permissions.ManageSellerReviews));
+            new SellerAuthorizationRequirement(Core.ModuleConstants.Security.Permissions.AccessSellerReviews));
         if (!authorizationResult.Succeeded)
         {
             return Unauthorized();
