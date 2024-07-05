@@ -20,7 +20,7 @@ public class SearchCustomerReviewsQueryHandler : IQueryHandler<SearchCustomerRev
     {
         var searchCriteria = new CustomerReviewSearchCriteria
         {
-            EntityIds = new[] { request.SellerId },
+            EntityIds = [request.SellerId],
             EntityType = nameof(Organization),
             Keyword = request.Keyword,
             Skip = request.Skip,
