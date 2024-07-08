@@ -1,0 +1,17 @@
+# v2.0.0
+name: Build Reviews Module
+
+runs:
+  using: composite
+
+  steps:
+
+    - name: Install dependencies for Reviews Module
+      shell: bash
+      working-directory: src/VirtoCommerce.MarketplaceReviews.Web/reviews-app
+      run: yarn
+
+    - name: Build Reviews Module
+      shell: bash
+      working-directory:  src/VirtoCommerce.MarketplaceReviews.Web/reviews-app
+      run: yarn build:modules-bundle

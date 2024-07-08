@@ -1,0 +1,13 @@
+{
+  "name": "@vcmp-marketplace-reviews/api",
+  "version": "0.0.0",
+  "files": [
+    "package.json"
+  ],
+  "exports": {
+    "./marketplacereviews": {
+      "import": "./virtocommerce.marketplacereviews.js",
+      "types": "./types/virtocommerce.marketplacereviews.js"
+    }
+  }
+}

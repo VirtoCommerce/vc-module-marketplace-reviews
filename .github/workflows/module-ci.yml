@@ -92,6 +92,9 @@ jobs:
         with:
           versionSuffix: ${{ env.VERSION_SUFFIX }}
 
+      - name: Build Reviews Module
+        uses: ./.github/actions/build-reviews-module
+
       - name: Build
         run: vc-build Compile
 
