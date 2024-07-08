@@ -3,10 +3,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using VirtoCommerce.MarketplaceReviewsModule.Core;
 using VirtoCommerce.MarketplaceReviewsModule.Data.Repositories;
+using VirtoCommerce.MarketplaceReviewsModule.Web.Authorization;
 using VirtoCommerce.Platform.Core.Modularity;
-using VirtoCommerce.Platform.Core.Security;
 
 namespace VirtoCommerce.MarketplaceReviewsModule.Web;
 
@@ -30,13 +29,8 @@ public class Module : IModule, IHasConfiguration
     {
         var serviceProvider = appBuilder.ApplicationServices;
 
-        // Register settings
-        //var settingsRegistrar = serviceProvider.GetRequiredService<ISettingsRegistrar>();
-        //settingsRegistrar.RegisterSettings(ModuleConstants.Settings.AllSettings, ModuleInfo.Id);
-
-        // Register permissions
-        var permissionsRegistrar = serviceProvider.GetRequiredService<IPermissionsRegistrar>();
-        permissionsRegistrar.RegisterPermissions(ModuleInfo.Id, "MarketplaceReviewsModule", ModuleConstants.Security.Permissions.AllPermissions);
+        //Register module authorization
+        appBuilder.UseModuleAuthorization();
 
         // Apply migrations
         using var serviceScope = serviceProvider.CreateScope();

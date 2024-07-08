@@ -1,3 +1,6 @@
+using System.Linq;
+using VirtoCommerce.Platform.Core.Security;
+
 namespace VirtoCommerce.MarketplaceReviewsModule.Core;
 
 public static class ModuleConstants
@@ -13,35 +16,56 @@ public static class ModuleConstants
                 AccessSellerReviews,
             };
         }
+
+        public static class Roles
+        {
+            public static readonly Role Operator = new()
+            {
+                Id = "vcmp-operator-role",
+                Permissions = new[]
+                {
+                    Permissions.AccessSellerReviews
+                }
+                .Select(x => new Permission { GroupName = "Marketplace", Name = x })
+                .ToList()
+            };
+
+            public static readonly Role VendorOwner = new()
+            {
+                Id = "vcmp-owner-role",
+                Permissions = new[]
+                {
+                    Permissions.AccessSellerReviews
+                }
+                .Select(x => new Permission { GroupName = "Marketplace", Name = x })
+                .ToList()
+            };
+
+            public static readonly Role VendorAdmin = new()
+            {
+                Id = "vcmp-admin-role",
+                Permissions = new[]
+                {
+                    Permissions.AccessSellerReviews
+                }
+                .Select(x => new Permission { GroupName = "Marketplace", Name = x })
+                .ToList()
+            };
+
+            public static readonly Role VendorAgent = new()
+            {
+                Id = "vcmp-agent-role",
+                Permissions = new[]
+                {
+                    Permissions.AccessSellerReviews
+                }
+                .Select(x => new Permission { GroupName = "Marketplace", Name = x })
+                .ToList()
+            };
+
+            public static Role[] AllRoles = { Operator, VendorOwner, VendorAdmin, VendorAgent };
+
+        }
     }
 
-    //public static class Settings
-    //{
-    //    public static class General
-    //    {
-    //        public static SettingDescriptor MarketplaceReviewsModuleEnabled { get; } = new()
-    //        {
-    //            Name = "MarketplaceReviewsModule.MarketplaceReviewsModuleEnabled",
-    //            GroupName = "MarketplaceReviewsModule|General",
-    //            ValueType = SettingValueType.Boolean,
-    //            DefaultValue = false,
-    //        };
-
-    //        public static IEnumerable<SettingDescriptor> AllGeneralSettings
-    //        {
-    //            get
-    //            {
-    //                yield return MarketplaceReviewsModuleEnabled;
-    //            }
-    //        }
-    //    }
-
-    //    public static IEnumerable<SettingDescriptor> AllSettings
-    //    {
-    //        get
-    //        {
-    //            return General.AllGeneralSettings;
-    //        }
-    //    }
-    //}
 }
