@@ -8,6 +8,12 @@
     <SonarQubeTestProject>false</SonarQubeTestProject>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="reviews-app\**" />
+    <Content Remove="reviews-app\**" />
+    <EmbeddedResource Remove="reviews-app\**" />
+    <None Remove="reviews-app\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="VirtoCommerce.MarketplaceVendorModule.Core" Version="3.814.0" />
     <PackageReference Include="VirtoCommerce.MarketplaceVendorModule.Data" Version="3.814.0" />
@@ -16,6 +22,12 @@
     <ProjectReference Include="..\VirtoCommerce.MarketplaceReviewsModule.Core\VirtoCommerce.MarketplaceReviewsModule.Core.csproj" />
     <ProjectReference Include="..\VirtoCommerce.MarketplaceReviewsModule.Data\VirtoCommerce.MarketplaceReviewsModule.Data.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <ReviewsApp Include="reviews-app\dist\**" />
+  </ItemGroup>
+  <Target Name="CopyCustomContentOnPublish" AfterTargets="Publish">
+    <Copy SourceFiles="@(ReviewsApp)" DestinationFiles="$(PublishDir)\..\%(Identity)" />
+  </Target>
   <ItemGroup>
     <Folder Include="Scripts\blades\" />
   </ItemGroup>
