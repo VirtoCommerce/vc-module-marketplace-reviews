@@ -8,10 +8,10 @@ runs:
 
     - name: Install dependencies for Reviews Module
       shell: bash
-      working-directory: src/VirtoCommerce.MarketplaceReviews.Web/reviews-app
+      working-directory: src/VirtoCommerce.MarketplaceReviewsModule.Web/reviews-app
       run: yarn
 
     - name: Build Reviews Module
       shell: bash
-      working-directory:  src/VirtoCommerce.MarketplaceReviews.Web/reviews-app
+      working-directory:  src/VirtoCommerce.MarketplaceReviewsModule.Web/reviews-app
       run: yarn build:modules-bundle
