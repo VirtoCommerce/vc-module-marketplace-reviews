@@ -10,29 +10,15 @@ export default defineConfig({
   build: {
     manifest: "manifest.json",
     copyPublicDir: false,
-    minify: false,
     sourcemap: true,
     lib: {
       entry: resolve(__dirname, "./index.ts"),
-      fileName: (format, name) => `${name}.js`,
-      formats: ["umd"],
-      name: "vc-marketplace-reviews",
+      fileName: (format, name) => `${name}.mjs`,
+      formats: ["es"],
     },
 
     outDir: join(__dirname, "../../dist/packages/modules"),
     rollupOptions: {
-      output: {
-        globals: {
-          vue: "Vue",
-          "vue-router": "VueRouter",
-          "vee-validate": "VeeValidate",
-          "vue-i18n": "VueI18n",
-          moment: "moment",
-          "lodash-es": "_",
-          "@vueuse/core": "VueUse",
-          "@vc-shell/framework": "VcShell",
-        },
-      },
       external: [
         /node_modules/,
         "@vc-shell/framework",
