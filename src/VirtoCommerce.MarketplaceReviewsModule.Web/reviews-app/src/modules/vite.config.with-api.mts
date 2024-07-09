@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import { resolve, join, dirname } from "node:path";
 import vue from "@vitejs/plugin-vue";
 import { fileURLToPath } from "node:url";
+import { externalizeDeps } from "vite-plugin-externalize-deps";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -9,9 +10,11 @@ export default defineConfig({
   build: {
     manifest: "manifest.json",
     copyPublicDir: false,
+    minify: false,
+    sourcemap: true,
     lib: {
       entry: resolve(__dirname, "./index.ts"),
-      fileName: (format, name) => `${name}.mjs`,
+      fileName: (format, name) => `${name}.js`,
       formats: ["umd"],
       name: "vc-marketplace-reviews",
     },
@@ -28,7 +31,7 @@ export default defineConfig({
           "lodash-es": "_",
           "@vueuse/core": "VueUse",
           "@vc-shell/framework": "VcShell",
-        }
+        },
       },
       external: [
         /node_modules/,

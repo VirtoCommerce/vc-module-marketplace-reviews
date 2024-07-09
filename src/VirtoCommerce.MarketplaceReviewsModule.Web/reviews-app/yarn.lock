@@ -6585,6 +6585,7 @@ __metadata:
     vee-validate: "npm:^4.12.4"
     vite: "npm:^5.0.11"
     vite-plugin-checker: "npm:^0.6.2"
+    vite-plugin-externalize-deps: "npm:^0.8.0"
     vite-plugin-mkcert: "npm:^1.17.1"
     vue: "npm:^3.4.19"
     vue-eslint-parser: "npm:^9.3.2"
@@ -7818,6 +7819,15 @@ __metadata:
     vite:
       optional: true
   checksum: 3a0c65fb45dd5ce6e83e7525df2de3d7c27d92f39e7d363d27b6c2daf66feaf820c4bc014f326cb903dc816db8027845df7add47a8f33e80aa3927443299e812
+  languageName: node
+  linkType: hard
+
+"vite-plugin-externalize-deps@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "vite-plugin-externalize-deps@npm:0.8.0"
+  peerDependencies:
+    vite: ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0
+  checksum: a87b7bc44c810e5ef16314d76ccdd442d27018ea3fae531d22fc6bd803c20e0de4268d981bfc5db604ceb382cd9f646804da84df5a77dac98914be8ddc15b6ec
   languageName: node
   linkType: hard
 
