@@ -10,11 +10,12 @@ export default defineConfig({
     manifest: "manifest.json",
     copyPublicDir: false,
     sourcemap: true,
+    minify: false,
     lib: {
       entry: resolve(__dirname, "./index.ts"),
       fileName: (format, name) => `${name}.js`,
       formats: ["umd"],
-      name: "vc-marketplace-reviews-module",
+      name: "VcShellDynamicModules",
     },
 
     outDir: join(__dirname, "../../dist/packages/modules"),
@@ -28,7 +29,7 @@ export default defineConfig({
           moment: "moment",
           "lodash-es": "_",
           "@vueuse/core": "VueUse",
-          "@vc-shell/framework": "VcShell",
+          "@vc-shell/framework": "VcShellFramework",
         },
       },
       external: [
