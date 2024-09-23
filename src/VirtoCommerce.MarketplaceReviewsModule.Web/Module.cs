@@ -32,10 +32,10 @@ public class Module : IModule, IHasConfiguration
         //Register module authorization
         appBuilder.UseModuleAuthorization();
 
-        // Apply migrations
-        using var serviceScope = serviceProvider.CreateScope();
-        using var dbContext = serviceScope.ServiceProvider.GetRequiredService<MarketplaceReviewsModuleDbContext>();
-        dbContext.Database.Migrate();
+        // Apply migrations. Not need in this module
+        //using var serviceScope = serviceProvider.CreateScope();
+        //using var dbContext = serviceScope.ServiceProvider.GetRequiredService<MarketplaceReviewsModuleDbContext>();
+        //dbContext.Database.Migrate();
     }
 
     public void Uninstall()
