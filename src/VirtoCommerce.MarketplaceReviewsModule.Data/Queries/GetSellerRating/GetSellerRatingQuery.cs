@@ -1,3 +1,4 @@
+using VirtoCommerce.MarketplaceReviewsModule.Core.Models;
 using VirtoCommerce.MarketplaceVendorModule.Core.Common;
 using VirtoCommerce.MarketplaceVendorModule.Core.Domains;
 

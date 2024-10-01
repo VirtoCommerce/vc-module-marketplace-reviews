@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using VirtoCommerce.CustomerModule.Core.Model;
 using VirtoCommerce.CustomerReviews.Core.Services;
+using VirtoCommerce.MarketplaceReviewsModule.Core.Models;
 using VirtoCommerce.MarketplaceVendorModule.Core.Common;
 
 namespace VirtoCommerce.MarketplaceReviewsModule.Data.Queries.GetSellerRating;

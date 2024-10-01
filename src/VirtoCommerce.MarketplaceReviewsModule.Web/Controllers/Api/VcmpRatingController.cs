@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using VirtoCommerce.MarketplaceReviewsModule.Core.Models;
 using VirtoCommerce.MarketplaceReviewsModule.Data.Queries.GetSellerRating;
 using VirtoCommerce.MarketplaceVendorModule.Core.Common;
 using VirtoCommerce.MarketplaceVendorModule.Data.Authorization;
