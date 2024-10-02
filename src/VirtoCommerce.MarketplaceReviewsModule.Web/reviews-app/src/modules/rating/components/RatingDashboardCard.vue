@@ -31,7 +31,7 @@
     >
       <template #widget-mobile="{ loading }">
         <div
-          v-loading="loading"
+          v-loading:100="loading"
           class="vc-rating-widget__mobile"
           @click="() => onItemClick()"
         >
