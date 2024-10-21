@@ -15,8 +15,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR" Version="9.0.0" />
-    <PackageReference Include="VirtoCommerce.MarketplaceVendorModule.Core" Version="3.814.0" />
-    <PackageReference Include="VirtoCommerce.MarketplaceVendorModule.Data" Version="3.814.0" />
+    <PackageReference Include="VirtoCommerce.MarketplaceVendorModule.Core" Version="3.824.0" />
+    <PackageReference Include="VirtoCommerce.MarketplaceVendorModule.Data" Version="3.824.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VirtoCommerce.MarketplaceReviewsModule.Core\VirtoCommerce.MarketplaceReviewsModule.Core.csproj" />
