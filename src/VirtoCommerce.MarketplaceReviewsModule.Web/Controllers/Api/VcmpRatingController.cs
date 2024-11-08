@@ -31,7 +31,7 @@ public class VcmpRatingController : ControllerBase
             new SellerAuthorizationRequirement(Core.ModuleConstants.Security.Permissions.AccessSellerReviews));
         if (!authorizationResult.Succeeded)
         {
-            return Unauthorized();
+            return Forbid();
         }
 
         var result = await _mediator.Send(query);
@@ -49,7 +49,7 @@ public class VcmpRatingController : ControllerBase
             new SellerAuthorizationRequirement(Core.ModuleConstants.Security.Permissions.AccessSellerReviews));
         if (!authorizationResult.Succeeded)
         {
-            return Unauthorized();
+            return Forbid();
         }
 
         var result = await _mediator.Send(query);

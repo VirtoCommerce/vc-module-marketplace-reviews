@@ -27,7 +27,7 @@ public class VcmpReviewsController : ControllerBase
             new SellerAuthorizationRequirement(Core.ModuleConstants.Security.Permissions.AccessSellerReviews));
         if (!authorizationResult.Succeeded)
         {
-            return Unauthorized();
+            return Forbid();
         }
         var result = await _mediator.Send(query);
         return Ok(result);
