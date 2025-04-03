@@ -13,7 +13,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     <PackageReference Include="VirtoCommerce.CustomerReviews.Core" Version="3.803.0" />
-    <PackageReference Include="VirtoCommerce.MarketplaceVendorModule.Core" Version="3.824.0" />
     <PackageReference Include="VirtoCommerce.Platform.Data.SqlServer" Version="3.825.0" />
   </ItemGroup>
   <ItemGroup>

@@ -1,8 +1,8 @@
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using VirtoCommerce.MarketplaceReviewsModule.Data;
 using VirtoCommerce.MarketplaceReviewsModule.Data.Repositories;
 using VirtoCommerce.MarketplaceReviewsModule.Web.Authorization;
 using VirtoCommerce.Platform.Core.Modularity;
@@ -22,7 +22,7 @@ public class Module : IModule, IHasConfiguration
 
         serviceCollection.AddDbContext<MarketplaceReviewsModuleDbContext>(options => options.UseSqlServer(connectionString));
 
-        serviceCollection.AddMediatR(typeof(Data.Anchor));
+        serviceCollection.AddMediatR(configuration => configuration.RegisterServicesFromAssemblyContaining<Anchor>());
     }
 
     public void PostInitialize(IApplicationBuilder appBuilder)
