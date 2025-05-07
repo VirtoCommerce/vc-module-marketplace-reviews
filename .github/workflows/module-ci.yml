@@ -183,6 +183,7 @@ jobs:
 
   deploy-cloud:
     if: ${{ (github.ref == 'refs/heads/master') || (github.ref == 'refs/heads/dev') || (github.ref == 'refs/heads/feat/redesign') }}
+    runs-on: ubuntu-24.04
     needs: ci
     uses: VirtoCommerce/.github/.github/workflows/deploy-cloud.yml@v3.200.35
     with:
