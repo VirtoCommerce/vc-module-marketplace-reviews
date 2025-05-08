@@ -6,6 +6,8 @@ import { RouterView } from "vue-router";
 import Reviews from "./modules/rating";
 
 // Load required CSS
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "roboto-fontface/css/roboto/roboto-fontface.css";
 import "@vc-shell/framework/dist/index.css";
 
 async function startApp() {

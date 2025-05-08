@@ -1,7 +1,7 @@
 <template>
   <div class="tw-w-full tw-h-full tw-box-border tw-flex tw-flex-col tw-items-center tw-justify-center">
     <VcIcon
-      icon="material-star"
+      icon="fas fa-star"
       class="tw-text-[color:var(--empty-grid-icon-color)]"
       size="xxxl"
     />

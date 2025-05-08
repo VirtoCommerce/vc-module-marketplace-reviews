@@ -1,7 +1,7 @@
 <template>
   <VcCard
     :header="$t('RATING.WIDGET.TITLE')"
-    icon="material-star"
+    icon="fas fa-star"
     :fill="true"
   >
     <template
