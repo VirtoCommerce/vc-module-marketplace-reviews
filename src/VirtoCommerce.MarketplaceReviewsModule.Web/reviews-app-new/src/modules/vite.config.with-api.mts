@@ -28,7 +28,7 @@ export default defineConfig({
       formats: ["umd"],
       name: "VcShellDynamicModules",
     },
-    outDir: join(__dirname, "../../dist/packages/new-modules"),
+    outDir: join(__dirname, "../../dist/packages/modules"),
     rollupOptions: {
       output: {
         globals: {

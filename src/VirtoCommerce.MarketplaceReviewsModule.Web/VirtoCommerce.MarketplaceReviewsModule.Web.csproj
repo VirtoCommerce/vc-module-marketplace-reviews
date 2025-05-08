@@ -14,6 +14,12 @@
     <None Remove="reviews-app\**" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="reviews-app-new\**" />
+    <Content Remove="reviews-app-new\**" />
+    <EmbeddedResource Remove="reviews-app-new\**" />
+    <None Remove="reviews-app-new\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="VirtoCommerce.MarketplaceVendorModule.Data" Version="3.824.0" />
   </ItemGroup>
   <ItemGroup>
