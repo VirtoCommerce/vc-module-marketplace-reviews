@@ -46,7 +46,7 @@ export default defineConfig({
           const versionInfo = {
             version,
             compatibleWith: {
-              framework: "^" + getFrameworkVersion(),
+              framework: "^1.1.0",
               // Specify dependencies from other modules if they exist
               modules: {},
             },
@@ -101,7 +101,7 @@ export default defineConfig({
             const versionInfo = {
               version: pkg.version,
               compatibleWith: {
-                framework: "^" + getFrameworkVersion(),
+                framework: "^1.1.0",
                 modules: {},
               },
             };
