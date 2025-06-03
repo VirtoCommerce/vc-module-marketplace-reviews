@@ -4,7 +4,6 @@ import { getDynamicModuleConfiguration } from "@vc-shell/config-generator";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-
 export default getDynamicModuleConfiguration({
   build: {
     manifest: "manifest.json",
@@ -17,8 +16,5 @@ export default getDynamicModuleConfiguration({
   },
   compatibility: {
     framework: "^1.1.0",
-    apps: {
-      "vendor-portal-new": "^1.1.0",
-    },
   },
 });
