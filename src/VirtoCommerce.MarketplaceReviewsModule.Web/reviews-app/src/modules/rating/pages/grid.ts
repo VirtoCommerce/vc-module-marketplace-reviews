@@ -14,14 +14,14 @@ export const grid: DynamicGridSchema = {
     toolbar: [
       {
         id: "refresh",
-        icon: "fas fa-sync-alt",
+        icon: "material-refresh",
         title: "RATING.PAGES.LIST.TOOLBAR.REFRESH",
         method: "refresh",
       },
     ],
     menuItem: {
       title: "RATING.MENU.TITLE",
-      icon: "fas fa-star",
+      icon: "material-star",
       priority: 5,
     },
   },

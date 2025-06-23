@@ -25,6 +25,7 @@
   </ItemGroup>
   <Target Name="CopyCustomContentOnPublish" AfterTargets="Publish">
     <Copy SourceFiles="@(ReviewsApp)" DestinationFiles="$(PublishDir)\..\%(Identity)" />
+    <Copy SourceFiles="@(ReviewsAppNew)" DestinationFiles="$(PublishDir)\..\%(Identity)" />
   </Target>
   <ItemGroup>
     <Folder Include="Scripts\blades\" />
