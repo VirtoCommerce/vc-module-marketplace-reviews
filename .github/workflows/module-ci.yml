@@ -95,9 +95,6 @@ jobs:
       - name: Build Reviews Module
         uses: ./.github/actions/build-reviews-module
 
-      - name: Build New Reviews Module
-        uses: ./.github/actions/build-new-reviews-module
-
       - name: Build
         run: vc-build Compile
 
