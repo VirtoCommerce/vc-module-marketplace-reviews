@@ -95,13 +95,9 @@ async function addItem() {
   &__mobile {
     @apply tw-flex tw-flex-auto tw-flex-col;
   }
-
-  &__divider {
-    @apply tw-h-px tw-w-full tw-bg-[--base-border-color];
-  }
-
+  
   &__empty-message {
-    @apply tw-text-center tw-m-4 tw-font-medium tw-text-[26px] tw-text-[color:var(--mobile-card-count-color)];
+    @apply tw-text-center tw-m-4 tw-font-medium tw-text-[26px] tw-text-[color:var(--secondary-500)];
   }
 }
 </style>
