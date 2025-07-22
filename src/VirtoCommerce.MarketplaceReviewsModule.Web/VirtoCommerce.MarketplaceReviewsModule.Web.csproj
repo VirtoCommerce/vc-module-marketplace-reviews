@@ -14,7 +14,7 @@
     <None Remove="reviews-app\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VirtoCommerce.MarketplaceVendorModule.Data" Version="3.824.0" />
+    <PackageReference Include="VirtoCommerce.MarketplaceVendorModule.Data" Version="3.829.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VirtoCommerce.MarketplaceReviewsModule.Core\VirtoCommerce.MarketplaceReviewsModule.Core.csproj" />
