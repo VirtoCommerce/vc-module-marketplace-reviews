@@ -25,8 +25,6 @@ import { VcRating } from "@vc-shell/framework";
 import { onMounted } from "vue";
 import { useRating } from "../composables";
 
-// Component
-
 export interface Props {
   variant?: InstanceType<typeof VcRating>["variant"];
 }
@@ -36,8 +34,6 @@ withDefaults(defineProps<Props>(), { variant: "star-and-text" });
 onMounted(async () => {
   await getRating();
 });
-
-// Data
 
 const { loading, rating, reviewCount, getRating } = useRating();
 </script>
