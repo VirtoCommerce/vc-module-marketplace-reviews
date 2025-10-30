@@ -1,10 +1,10 @@
 <template>
   <VcStatus
-    v-if="context.item?.reviewStatus"
+    v-if="reviewStatus"
     :variant="status"
     :outline="false"
   >
-    {{ context.item.reviewStatus ?? "" }}
+    {{ reviewStatus ?? "" }}
   </VcStatus>
 </template>
 
@@ -14,18 +14,14 @@ import { computed } from "vue";
 import { CustomerReviewReviewStatus } from "@vcmp-marketplace-reviews/api/marketplacereviews";
 
 export interface Props {
-  context: {
-    item: {
-      reviewStatus: CustomerReviewReviewStatus;
-    };
-  };
+  reviewStatus: CustomerReviewReviewStatus;
 }
 
 const props = defineProps<Props>();
 
 const status = computed(() => {
   let status = undefined;
-  switch (props.context.item?.reviewStatus) {
+  switch (props.reviewStatus) {
     case CustomerReviewReviewStatus.New:
       status = "warning" as const;
       break;

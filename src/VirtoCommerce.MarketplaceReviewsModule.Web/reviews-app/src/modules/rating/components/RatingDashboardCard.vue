@@ -49,7 +49,7 @@
 
 <script setup lang="ts">
 import { useBladeNavigation } from "@vc-shell/framework";
-import Rating from "./Rating.vue";
+import Rating from "./rating.vue";
 
 const { openBlade, resolveBladeByName } = useBladeNavigation();
 
@@ -95,7 +95,7 @@ async function addItem() {
   &__mobile {
     @apply tw-flex tw-flex-auto tw-flex-col;
   }
-  
+
   &__empty-message {
     @apply tw-text-center tw-m-4 tw-font-medium tw-text-[26px] tw-text-[color:var(--secondary-500)];
   }

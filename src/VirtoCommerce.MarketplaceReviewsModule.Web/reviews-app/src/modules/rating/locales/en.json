@@ -31,6 +31,10 @@
         },
         "EMPTY": {
           "NO_ITEMS": "There is no rating left for you yet"
+        },
+        "NOT_FOUND": {
+          "EMPTY": "No reviews found",
+          "RESET": "Reset"
         }
       },
       "DETAILS": {

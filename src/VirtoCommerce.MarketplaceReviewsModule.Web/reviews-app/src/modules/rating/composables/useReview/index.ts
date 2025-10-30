@@ -1,56 +1,28 @@
-import {
-  useApiClient,
-  useDetailsFactory,
-  DetailsComposableArgs,
-  DetailsBaseBladeScope,
-  UseDetails,
-  useLanguages,
-} from "@vc-shell/framework";
-import {
-  SearchCustomerReviewsQuery,
-  CustomerReview,
-  VcmpReviewsClient,
-} from "@vcmp-marketplace-reviews/api/marketplacereviews";
-import moment from "moment";
-import { ComputedRef, Ref, computed, ref } from "vue";
-import { useI18n } from "vue-i18n";
+import { useApiClient, useAsync } from "@vc-shell/framework";
+import { SearchCustomerReviewsQuery, VcmpReviewsClient } from "@vcmp-marketplace-reviews/api/marketplacereviews";
+import { ref } from "vue";
 import { useRoute } from "vue-router";
-
-export interface ReviewDetailsScope extends DetailsBaseBladeScope {
-  createdDate: ComputedRef<string>;
-  title: ComputedRef<string>;
-  // disableReviewTextarea: boolean;
-}
 
 const { getApiClient } = useApiClient(VcmpReviewsClient);
 
-export const useReview = (args: DetailsComposableArgs): UseDetails<CustomerReview, ReviewDetailsScope> => {
-  const factory = useDetailsFactory({
-    load: async (item) => {
-      if (item?.id) {
-        const sellerId = await GetSellerId();
-        const command = new SearchCustomerReviewsQuery({ sellerId: sellerId, objectIds: [item.id] });
-
-        return (await getApiClient())
-          .searchCustomerReviews(command)
-          .then((res) => res.results?.find((x) => x.id === item.id));
-      }
-    },
-  });
-
-  const { load, saveChanges, remove, loading, item, validationState } = factory();
-  const { currentLocale } = useLanguages();
-  const { t } = useI18n({ useScope: "global" });
+export default () => {
   const route = useRoute();
 
-  const scope: ReviewDetailsScope = {
-    createdDate: computed(() => {
-      const date = new Date(item.value?.createdDate ?? "");
-      return moment(date).locale(currentLocale.value).format("L LT");
-    }),
-    title: computed(() => item.value?.title ?? t("RATING.PAGES.DETAILS.FORM.TITLE.PLACEHOLDER")),
-    disableReviewTextarea: true,
-  };
+  const review = ref();
+
+  const { action: loadReview, loading } = useAsync<string>(async (_id) => {
+    const sellerId = await GetSellerId();
+    if (!_id) {
+      review.value = undefined;
+      return;
+    }
+
+    const command = new SearchCustomerReviewsQuery({ sellerId: sellerId, objectIds: [_id] });
+
+    review.value = (await getApiClient())
+      .searchCustomerReviews(command)
+      .then((res) => res.results?.find((x) => x.id === _id));
+  });
 
   async function GetSellerId(): Promise<string> {
     const result = route?.params?.sellerId as string;
@@ -58,13 +30,8 @@ export const useReview = (args: DetailsComposableArgs): UseDetails<CustomerRevie
   }
 
   return {
-    load,
-    saveChanges,
-    remove,
+    review,
     loading,
-    item,
-    validationState,
-    scope,
-    bladeTitle: computed(() => t("RATING.PAGES.DETAILS.TITLE") as string),
+    loadReview,
   };
 };

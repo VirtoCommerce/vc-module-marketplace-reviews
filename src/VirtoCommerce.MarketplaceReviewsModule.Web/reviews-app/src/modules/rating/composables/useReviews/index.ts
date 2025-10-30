@@ -1,50 +1,50 @@
-import {
-  useApiClient,
-  useBladeNavigation,
-  useListFactory,
-  ListComposableArgs,
-  ListBaseBladeScope,
-  TOpenBladeArgs,
-  UseList,
-} from "@vc-shell/framework";
+import { computed, ref, Ref } from "vue";
 import {
   CustomerReview,
-  ISearchCustomerReviewsQuery,
   SearchCustomerReviewsQuery,
+  SearchCustomerReviewsResult,
   VcmpReviewsClient,
+  ISearchCustomerReviewsQuery,
 } from "@vcmp-marketplace-reviews/api/marketplacereviews";
-import { computed, ref } from "vue";
+import { useApiClient, useAsync } from "@vc-shell/framework";
 import { useRoute } from "vue-router";
 
-export interface ReviewsListScope extends ListBaseBladeScope<CustomerReview> {}
+interface IUseReviewsOptions {
+  pageSize?: number;
+  sort?: string;
+}
+interface IUseReviews {
+  loading: Ref<boolean>;
+  reviews: Ref<CustomerReview[]>;
+  customerReview: Ref<CustomerReview>;
+  totalCount: Ref<number>;
+  pages: Ref<number>;
+  currentPage: Ref<number>;
+  searchQuery: Ref<ISearchCustomerReviewsQuery>;
+  loadReviews: (query?: ISearchCustomerReviewsQuery) => Promise<void>;
+}
 
 const { getApiClient } = useApiClient(VcmpReviewsClient);
 
-export const useReviews = (
-  args: ListComposableArgs,
-): UseList<CustomerReview[], ISearchCustomerReviewsQuery, ReviewsListScope> => {
-  const factory = useListFactory<CustomerReview[], ISearchCustomerReviewsQuery>({
-    load: async (query) => {
-      const sellerId = await GetSellerId();
-      const command = new SearchCustomerReviewsQuery({ ...(query || {}), sellerId: sellerId });
-
-      return (await getApiClient()).searchCustomerReviews(command);
-    },
-  });
-
-  const { load, loading, items, query, pagination } = factory();
-  const { openBlade, resolveBladeByName } = useBladeNavigation();
+export default (options?: IUseReviewsOptions): IUseReviews => {
   const route = useRoute();
 
-  async function openDetailsBlade(args?: TOpenBladeArgs) {
-    await openBlade({
-      blade: resolveBladeByName("ReviewDetails"),
-      ...args,
-    });
-  }
+  const pageSize = options?.pageSize || 20;
+  const searchQuery = ref<ISearchCustomerReviewsQuery>({
+    take: pageSize,
+    skip: 0,
+    sort: options?.sort || "createdDate:DESC",
+  });
 
-  const scope = ref<ReviewsListScope>({
-    openDetailsBlade,
+  const searchResult = ref<SearchCustomerReviewsResult>();
+
+  const customerReview = ref(new CustomerReview());
+
+  const { action: loadReviews, loading } = useAsync<ISearchCustomerReviewsQuery>(async (query) => {
+    const sellerId = await GetSellerId();
+    const command = new SearchCustomerReviewsQuery({ ...query, sellerId: sellerId });
+
+    searchResult.value = await (await getApiClient()).searchCustomerReviews(command);
   });
 
   async function GetSellerId(): Promise<string> {
@@ -52,12 +52,20 @@ export const useReviews = (
     return result;
   }
 
+  // Computed properties
+  const items = computed(() => searchResult.value?.results || []);
+  const totalCount = computed(() => searchResult.value?.totalCount || 0);
+  const pages = computed(() => Math.ceil(totalCount.value / pageSize));
+  const currentPage = computed(() => Math.floor((searchQuery.value.skip || 0) / pageSize) + 1);
+
   return {
-    load,
-    loading,
-    items,
-    query,
-    pagination,
-    scope: computed(() => scope.value),
+    reviews: items,
+    loading: computed(() => loading.value),
+    customerReview: computed(() => customerReview.value),
+    totalCount,
+    pages,
+    currentPage,
+    searchQuery,
+    loadReviews,
   };
 };

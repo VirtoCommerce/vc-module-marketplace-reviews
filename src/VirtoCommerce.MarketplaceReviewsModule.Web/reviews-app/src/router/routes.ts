@@ -15,12 +15,12 @@ export const routes: RouteRecordRaw[] = [
       root: true,
     },
     children: [],
-    redirect: (to) => {
-      if (to.name === "App") {
-        return { path: "/reviews", params: to.params };
-      }
-      return to.path;
-    },
+    // redirect: (to) => {
+    //   if (to.name === "App") {
+    //     return { path: "/reviews", params: to.params };
+    //   }
+    //   return to.path;
+    // },
   },
   {
     name: "Login",

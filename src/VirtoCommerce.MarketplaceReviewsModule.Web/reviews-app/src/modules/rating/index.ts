@@ -1,10 +1,15 @@
-import * as schema from "./pages";
-import * as composables from "./composables";
+import * as pages from "./pages";
 import * as locales from "./locales";
-import * as components from "./components";
-import { createDynamicAppModule } from "@vc-shell/framework";
+import { createAppModule, registerDashboardWidget } from "@vc-shell/framework";
+import { markRaw } from "vue";
+import RatingDashboardCard from "./components/RatingDashboardCard.vue";
 
-export default createDynamicAppModule({ schema, composables, locales, moduleComponents: components });
+// Register the rating & reviews widget
+registerDashboardWidget({
+  id: "rating-reviews-widget",
+  name: "Rating & Reviews",
+  component: markRaw(RatingDashboardCard),
+  size: { width: 6, height: 6 },
+});
 
-export { schema, composables, locales, components };
-export type { ReviewDetailsScope, ReviewsListScope } from "./composables";
+export default createAppModule(pages, locales);

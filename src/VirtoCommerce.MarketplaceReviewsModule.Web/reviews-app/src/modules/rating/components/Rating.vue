@@ -16,7 +16,7 @@
         }}
       </template>
     </VcRating>
-    <slot v-else>{{ $t("RATING.RATING.EMPTY") }}</slot>
+    <span v-else>{{ $t("RATING.RATING.EMPTY") }}</span>
   </div>
 </template>
 
@@ -25,15 +25,19 @@ import { VcRating } from "@vc-shell/framework";
 import { onMounted } from "vue";
 import { useRating } from "../composables";
 
+// Component
+
 export interface Props {
   variant?: InstanceType<typeof VcRating>["variant"];
 }
 
 withDefaults(defineProps<Props>(), { variant: "star-and-text" });
 
-const { loading, rating, reviewCount, getRating } = useRating();
-
 onMounted(async () => {
   await getRating();
 });
+
+// Data
+
+const { loading, rating, reviewCount, getRating } = useRating();
 </script>
