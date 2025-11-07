@@ -4,9 +4,11 @@ import { router } from "./router";
 import * as locales from "./locales";
 import { RouterView } from "vue-router";
 import Reviews from "./modules/rating";
+import { bootstrap } from "./bootstrap";
 
 // Load required CSS
 import "@vc-shell/framework/dist/index.css";
+
 
 async function startApp() {
   const { loadUser } = useUser();
@@ -31,6 +33,8 @@ async function startApp() {
   });
 
   setLocale(currentLocale.value);
+
+  bootstrap();
 
   app.config.errorHandler = (err) => {
     notification.error((err as Error).toString(), {

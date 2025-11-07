@@ -1,3 +1,8 @@
 {
-  "language_name": "English"
+  "language_name": "English",
+  "SHELL": {
+    "MENU": {
+      "DASHBOARD": "Dashboard"
+    }
+  }
 }

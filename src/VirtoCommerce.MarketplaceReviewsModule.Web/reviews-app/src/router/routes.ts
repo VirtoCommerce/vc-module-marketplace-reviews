@@ -5,6 +5,7 @@ import { Invite, Login, ResetPassword, useBladeNavigation, ChangePasswordPage } 
 import whiteLogoImage from "/assets/logo-white.svg";
 // eslint-disable-next-line import/no-unresolved
 import bgImage from "/assets/background.jpg";
+import Dashboard from "../pages/Dashboard.vue";
 
 export const routes: RouteRecordRaw[] = [
   {
@@ -14,7 +15,14 @@ export const routes: RouteRecordRaw[] = [
     meta: {
       root: true,
     },
-    children: [],
+    children: [
+      {
+        name: "Dashboard",
+        path: "",
+        alias: `/`,
+        component: Dashboard,
+      },
+    ],
     // redirect: (to) => {
     //   if (to.name === "App") {
     //     return { path: "/reviews", params: to.params };
