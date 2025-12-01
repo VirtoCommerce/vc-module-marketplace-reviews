@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <OutputType>Library</OutputType>
@@ -14,7 +14,7 @@
     <None Remove="reviews-app\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VirtoCommerce.MarketplaceVendorModule.Data" Version="3.829.0" />
+    <PackageReference Include="VirtoCommerce.MarketplaceVendorModule.Data" Version="3.830.0-alpha.924" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VirtoCommerce.MarketplaceReviewsModule.Core\VirtoCommerce.MarketplaceReviewsModule.Core.csproj" />
