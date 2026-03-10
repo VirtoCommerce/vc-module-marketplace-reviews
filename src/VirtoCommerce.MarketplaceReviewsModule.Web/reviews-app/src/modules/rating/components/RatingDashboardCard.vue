@@ -14,11 +14,11 @@
           variant="star-and-text"
         ></Rating>
         <vc-button
-          small
-          variant="secondary"
+          size="sm"
+          variant="ghost"
           @click="() => onItemClick()"
         >
-          {{ $t("RATING.WIDGET.ALL") }}
+          {{ $t("RATING.WIDGET.ALL") }} &rarr;
         </vc-button>
       </div>
     </template>
