@@ -4465,9 +4465,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vc-shell/api-client-generator@portal:/Users/symbot/DEV/vc-shell-main-dev/vc-shell/cli/api-client::locator=reviews-app%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@vc-shell/api-client-generator@portal:/Users/symbot/DEV/vc-shell-main-dev/vc-shell/cli/api-client::locator=reviews-app%40workspace%3A."
+"@vc-shell/api-client-generator@npm:^2.0.0-alpha.6":
+  version: 2.0.0-alpha.6
+  resolution: "@vc-shell/api-client-generator@npm:2.0.0-alpha.6"
   dependencies:
     chalk: "npm:^2.4.2"
     cross-spawn: "npm:^7.0.3"
@@ -4476,13 +4476,14 @@ __metadata:
     vite: "npm:^6.3.3"
     vite-plugin-dts: "npm:^3.6.4"
   bin:
-    api-client-generator: ./dist/api-client-generator.js
+    api-client-generator: dist/api-client-generator.js
+  checksum: 1b6be206a70d39debbe9e264d0abc0e877608629c3fdd0b0810c0759517b5be876859bd82355cb6d4b1283c5ab686b06bb106b6a65cef0082108f65b07328790
   languageName: node
-  linkType: soft
+  linkType: hard
 
-"@vc-shell/config-generator@portal:/Users/symbot/DEV/vc-shell-main-dev/vc-shell/configs/vite-config::locator=reviews-app%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@vc-shell/config-generator@portal:/Users/symbot/DEV/vc-shell-main-dev/vc-shell/configs/vite-config::locator=reviews-app%40workspace%3A."
+"@vc-shell/config-generator@npm:^2.0.0-alpha.6":
+  version: 2.0.0-alpha.6
+  resolution: "@vc-shell/config-generator@npm:2.0.0-alpha.6"
   dependencies:
     "@module-federation/dts-plugin": "npm:2.0.1"
     "@module-federation/vite": "npm:^1.12.2"
@@ -4492,12 +4493,13 @@ __metadata:
     vite-plugin-circular-dependency: "npm:^0.5.0"
     vite-plugin-mkcert: "npm:^1.17.1"
     vue: "npm:^3.5.13"
+  checksum: 6e1f1d1477b5b17818b28439c45182eb49a53d5af012d791d83f0987b530867de43fdc72b4df945e7563787174abfb91286a0c1aca899066d9fa4dc20211e2d0
   languageName: node
-  linkType: soft
+  linkType: hard
 
-"@vc-shell/framework@portal:/Users/symbot/DEV/vc-shell-main-dev/vc-shell/framework::locator=reviews-app%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@vc-shell/framework@portal:/Users/symbot/DEV/vc-shell-main-dev/vc-shell/framework::locator=reviews-app%40workspace%3A."
+"@vc-shell/framework@npm:^2.0.0-alpha.6":
+  version: 2.0.0-alpha.6
+  resolution: "@vc-shell/framework@npm:2.0.0-alpha.6"
   dependencies:
     "@floating-ui/dom": "npm:^1.7.4"
     "@floating-ui/vue": "npm:^1.0.6"
@@ -4558,12 +4560,13 @@ __metadata:
       optional: false
     vue-router:
       optional: false
+  checksum: 3a0bbcf8d96f31b562368e9f56136bf0e8a816f7af82b42ea856dda551d6c8b8a2d66de8c50c8313a5d61433a14550242b359ec3d474946c81691b450b5b2bd3
   languageName: node
-  linkType: soft
+  linkType: hard
 
-"@vc-shell/release-config@portal:/Users/symbot/DEV/vc-shell-main-dev/vc-shell/configs/release-config::locator=reviews-app%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@vc-shell/release-config@portal:/Users/symbot/DEV/vc-shell-main-dev/vc-shell/configs/release-config::locator=reviews-app%40workspace%3A."
+"@vc-shell/release-config@npm:^2.0.0-alpha.6":
+  version: 2.0.0-alpha.6
+  resolution: "@vc-shell/release-config@npm:2.0.0-alpha.6"
   dependencies:
     chalk: "npm:^2.4.2"
     conventional-changelog-cli: "npm:^5.0.0"
@@ -4573,15 +4576,17 @@ __metadata:
     prompts: "npm:^2.4.2"
     semver: "npm:^7.7.4"
   bin:
-    vc-generate-changelogs: ./dist/cli-generate-changelogs.js
+    vc-generate-changelogs: dist/cli-generate-changelogs.js
+  checksum: ae2bf76bf38b3728f7dabced73d03fa9a83053976df1ffc2084b45a2239b2681cd0d0a7b4df0010c1efd5f40cd24821c4b128e002bdbd33c5a8c6bac56760f94
   languageName: node
-  linkType: soft
+  linkType: hard
 
-"@vc-shell/ts-config@portal:/Users/symbot/DEV/vc-shell-main-dev/vc-shell/configs/ts-config::locator=reviews-app%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@vc-shell/ts-config@portal:/Users/symbot/DEV/vc-shell-main-dev/vc-shell/configs/ts-config::locator=reviews-app%40workspace%3A."
+"@vc-shell/ts-config@npm:^2.0.0-alpha.6":
+  version: 2.0.0-alpha.6
+  resolution: "@vc-shell/ts-config@npm:2.0.0-alpha.6"
+  checksum: 2134b0313ed1ef5cb5947922c46c8debc80ab612d71f85104e6fe213ea432d576e68ec91c68c413d33454179bd16f23d3eee6477563a9bda79b1c1a5edfbc79f
   languageName: node
-  linkType: soft
+  linkType: hard
 
 "@vcmp-marketplace-reviews/api@workspace:src/api_client":
   version: 0.0.0-use.local
