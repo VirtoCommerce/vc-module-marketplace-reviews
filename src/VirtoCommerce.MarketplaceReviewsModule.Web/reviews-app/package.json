@@ -58,11 +58,6 @@
     "vue-tsc": "^2.2.10"
   },
   "resolutions": {
-    "@vc-shell/framework": "portal:/Users/symbot/DEV/vc-shell-main-dev/vc-shell/framework",
-    "@vc-shell/config-generator": "portal:/Users/symbot/DEV/vc-shell-main-dev/vc-shell/configs/vite-config",
-    "@vc-shell/api-client-generator": "portal:/Users/symbot/DEV/vc-shell-main-dev/vc-shell/cli/api-client",
-    "@vc-shell/release-config": "portal:/Users/symbot/DEV/vc-shell-main-dev/vc-shell/configs/release-config",
-    "@vc-shell/ts-config": "portal:/Users/symbot/DEV/vc-shell-main-dev/vc-shell/configs/ts-config",
     "@module-federation/dts-plugin": "2.0.1"
   },
   "dependencies": {
