@@ -9,14 +9,14 @@
       :variant="variant"
     >
       <template #details>
-        {{
-          $t("RATING.RATING.REVIEWS", {
-            count: reviewCount,
-          })
-        }}
+        <span class="tw-text-sm">{{ $t("RATING.RATING.REVIEWS", { count: reviewCount }) }} </span>
       </template>
     </VcRating>
-    <span v-else>{{ $t("RATING.RATING.EMPTY") }}</span>
+    <span
+      v-else
+      class="tw-text-sm"
+      >{{ $t("RATING.RATING.EMPTY") }}</span
+    >
   </div>
 </template>
 
