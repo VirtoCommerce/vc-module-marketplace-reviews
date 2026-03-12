@@ -3341,6 +3341,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vc-shell/ts-config@npm:^2.0.0-alpha.9":
+  version: 2.0.0-alpha.9
+  resolution: "@vc-shell/ts-config@npm:2.0.0-alpha.9"
+  checksum: 11a5a9b78b82661b75f048656a16efbcaf594dea6272b25a225d9619a41ce1366b60c507ab5da619ccf60a96c8b444c81a3ccf5f991751bd7eae0ce7bc3929b9
+  languageName: node
+  linkType: hard
+
 "@vcmp-marketplace-reviews/api@workspace:src/api_client":
   version: 0.0.0-use.local
   resolution: "@vcmp-marketplace-reviews/api@workspace:src/api_client"
@@ -10061,6 +10068,7 @@ __metadata:
     "@vc-shell/api-client-generator": "npm:2.0.0-alpha.9"
     "@vc-shell/config-generator": "npm:2.0.0-alpha.9"
     "@vc-shell/framework": "npm:2.0.0-alpha.9"
+    "@vc-shell/ts-config": "npm:^2.0.0-alpha.9"
     "@vitejs/plugin-vue": "npm:^5.2.3"
     "@vue/eslint-config-prettier": "npm:^9.0.0"
     "@vue/eslint-config-typescript": "npm:^13.0.0"
