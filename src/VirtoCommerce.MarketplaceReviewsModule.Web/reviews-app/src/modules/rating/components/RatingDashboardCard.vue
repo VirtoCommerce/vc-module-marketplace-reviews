@@ -1,7 +1,7 @@
 <template>
   <DashboardWidgetCard
     :header="$t('RATING.WIDGET.TITLE')"
-    icon="material-star"
+    icon="lucide-star"
     :loading="loading"
   >
     <template
@@ -12,7 +12,7 @@
         <Rating
           class="vc-rating-widget__rating"
           variant="star-and-text"
-        ></Rating>
+        />
         <vc-button
           size="sm"
           variant="ghost"
@@ -24,93 +24,85 @@
     </template>
 
     <template #content>
-      <!-- @vue-generic {CustomerReview} -->
-      <VcTable
+      <VcDataTable
         :items="reviews"
-        :columns="tableColumns"
-        :header="false"
-        :footer="false"
-        :reorderable-columns="false"
+        :total-count="reviews?.length || 0"
         :resizable-columns="false"
+        :reorderable-columns="false"
         state-key="reviews-dashboard-card"
-        @item-click="onItemClick"
-      />
+        @row-click="onRowClick"
+      >
+        <VcColumn
+          id="title"
+          :title="t('RATING.PAGES.LIST.TABLE.HEADER.TITLE')"
+          :always-visible="true"
+          class="tw-truncate"
+        />
+
+        <VcColumn
+          id="review"
+          :title="t('RATING.PAGES.LIST.TABLE.HEADER.REVIEW')"
+          class="tw-truncate"
+        />
+
+        <VcColumn
+          id="rating"
+          :title="t('RATING.PAGES.LIST.TABLE.HEADER.RATING')"
+          :always-visible="true"
+          :width="140"
+        />
+
+        <VcColumn
+          id="status"
+          field="reviewStatus"
+          :title="t('RATING.PAGES.LIST.TABLE.HEADER.STATUS')"
+          :always-visible="true"
+          :width="120"
+        />
+
+        <VcColumn
+          id="createdDate"
+          :title="t('RATING.PAGES.LIST.TABLE.HEADER.CREATEDDATE')"
+          :always-visible="true"
+          type="date-ago"
+          :width="120"
+        />
+
+        <VcColumn
+          id="createdBy"
+          :title="t('RATING.PAGES.LIST.TABLE.HEADER.CREATEDBY')"
+          :always-visible="true"
+          :width="140"
+        />
+      </VcDataTable>
     </template>
   </DashboardWidgetCard>
 </template>
 
 <script setup lang="ts">
-import { ITableColumns, useBladeNavigation, DashboardWidgetCard } from "@vc-shell/framework";
+import { useBlade, DashboardWidgetCard } from "@vc-shell/framework";
 import Rating from "./Rating.vue";
 import { CustomerReview } from "@vcmp-marketplace-reviews/api/marketplacereviews";
 import { useReviews } from "../composables";
-import { computed, onMounted, ref } from "vue";
+import { onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 
-const { openBlade, resolveBladeByName } = useBladeNavigation();
+const { openBlade } = useBlade();
 const { t } = useI18n({ useScope: "global" });
 
 const { loading, reviews, loadReviews } = useReviews({
   pageSize: 5,
 });
 
-const tableColumns = ref<ITableColumns[]>([
-  {
-    id: "title",
-    title: computed(() => t("RATING.PAGES.LIST.TABLE.HEADER.TITLE")),
-    alwaysVisible: true,
-    class: "tw-truncate",
-  },
-  {
-    id: "review",
-    title: computed(() => t("RATING.PAGES.LIST.TABLE.HEADER.REVIEW")),
-    alwaysVisible: false,
-    class: "tw-truncate",
-  },
-  {
-    id: "rating",
-    title: computed(() => t("RATING.PAGES.LIST.TABLE.HEADER.RATING")),
-    alwaysVisible: true,
-    sortable: true,
-    width: 140,
-  },
-  {
-    id: "status",
-    field: "reviewStatus",
-    title: computed(() => t("RATING.PAGES.LIST.TABLE.HEADER.STATUS")),
-    alwaysVisible: true,
-    width: 120,
-  },
-  {
-    id: "createdDate",
-    title: computed(() => t("RATING.PAGES.LIST.TABLE.HEADER.CREATEDDATE")),
-    alwaysVisible: true,
-    sortable: true,
-    type: "date-ago",
-    width: 120,
-  },
-  {
-    id: "createdBy",
-    title: computed(() => t("RATING.PAGES.LIST.TABLE.HEADER.CREATEDBY")),
-    alwaysVisible: true,
-    width: 140,
-  },
-]);
+function onRowClick(event: { data: CustomerReview }) {
+  onItemClick(event.data);
+}
 
 async function onItemClick(args?: CustomerReview) {
-  await openBlade(
-    {
-      blade: resolveBladeByName("Reviews"),
-      param: args?.id,
-    },
-    true,
-  );
+  await openBlade({ name: "Reviews", param: args?.id });
 
   if (args?.id) {
-    await openBlade({
-      blade: resolveBladeByName("ReviewDetails"),
-      param: args?.id,
-    });
+    await openBlade({ name: "ReviewDetails", param: args.id });
   }
 }
 

@@ -3,99 +3,113 @@
     :title="title"
     :toolbar-items="bladeToolbar"
     width="70%"
-    :expanded="expanded"
-    :closable="closable"
-    @close="$emit('close:blade')"
-    @expand="$emit('expand:blade')"
-    @collapse="$emit('collapse:blade')"
   >
-    <!-- @vue-generic {CustomerReview}-->
-    <VcTable
+    <VcDataTable
+      v-model:active-item-id="selectedItemId"
+      v-model:sort-field="sortField"
+      v-model:sort-order="sortOrder"
       class="tw-w-full tw-h-full tw-box-border"
       :loading="loading"
-      :expanded="expanded"
-      :columns="tableColumns"
-      :header="false"
       :items="reviews ?? []"
-      :selected-item-id="selectedItemId"
-      :sort="sortExpression"
-      :pages="pages"
-      :current-page="currentPage"
-      :total-label="$t('RATING.REVIEW_TABLE.TOTALS')"
       :total-count="totalCount"
-      :empty="empty"
-      :notfound="notfound"
-      :multiselect="false"
+      :pagination="{ currentPage, pages }"
+      :total-label="$t('RATING.REVIEW_TABLE.TOTALS')"
+      :pull-to-refresh="true"
+      :empty-state="{
+        icon: 'lucide-star',
+        title: $t('RATING.PAGES.LIST.EMPTY.NO_ITEMS'),
+      }"
+      :not-found-state="{
+        icon: 'lucide-star',
+        title: $t('RATING.PAGES.LIST.NOT_FOUND.EMPTY'),
+      }"
       state-key="review_table"
-      :pull-to-reload="true"
-      @header-click="onHeaderClick"
-      @item-click="onItemClick"
+      @row-click="onItemClick"
       @pagination-click="onPaginationClick"
-      @scroll:ptr="loadReviews"
+      @pull-refresh="loadReviews"
     >
-      <!-- Override rating column template -->
-      <template #item_rating="itemData">
-        <VcRating :model-value="itemData.item.rating ?? 0"></VcRating>
-      </template>
+      <VcColumn
+        id="title"
+        :title="t('RATING.PAGES.LIST.TABLE.HEADER.TITLE')"
+        :always-visible="true"
+        class="tw-truncate"
+      />
 
-      <!-- Override status column template -->
-      <template #item_status="itemData">
-        <Status :review-status="itemData.item.reviewStatus"></Status>
-      </template>
-    </VcTable>
+      <VcColumn
+        id="review"
+        :title="t('RATING.PAGES.LIST.TABLE.HEADER.REVIEW')"
+        class="tw-truncate"
+      />
+
+      <VcColumn
+        id="rating"
+        :title="t('RATING.PAGES.LIST.TABLE.HEADER.RATING')"
+        :always-visible="true"
+        :sortable="true"
+        :width="140"
+      >
+        <template #body="{ data }">
+          <VcRating :model-value="data.rating ?? 0" />
+        </template>
+      </VcColumn>
+
+      <VcColumn
+        id="status"
+        field="reviewStatus"
+        :title="t('RATING.PAGES.LIST.TABLE.HEADER.STATUS')"
+        :always-visible="true"
+        :width="120"
+      >
+        <template #body="{ data }">
+          <Status :review-status="data.reviewStatus" />
+        </template>
+      </VcColumn>
+
+      <VcColumn
+        id="createdDate"
+        :title="t('RATING.PAGES.LIST.TABLE.HEADER.CREATEDDATE')"
+        :always-visible="true"
+        :sortable="true"
+        type="date-ago"
+        :width="120"
+      />
+
+      <VcColumn
+        id="createdBy"
+        :title="t('RATING.PAGES.LIST.TABLE.HEADER.CREATEDBY')"
+        :always-visible="true"
+        :width="140"
+      />
+    </VcDataTable>
   </VcBlade>
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref, watch } from "vue";
-import { IBladeToolbar, ITableColumns, useBladeNavigation, useTableSort } from "@vc-shell/framework";
+import { onMounted, ref, watch } from "vue";
+import { IBladeToolbar, useBlade, useDataTableSort } from "@vc-shell/framework";
 import { CustomerReview } from "@vcmp-marketplace-reviews/api/marketplacereviews";
 import { useReviews } from "../composables";
+import { Status } from "../components";
 import { useI18n } from "vue-i18n";
 
-export interface Props {
-  expanded: boolean;
-  closable: boolean;
-  param?: string;
-  options?: {
-    review: CustomerReview;
-  };
-}
-
-export interface Emits {
-  (event: "close:blade"): void;
-  (event: "collapse:blade"): void;
-  (event: "expand:blade"): void;
-}
-
-defineOptions({
+defineBlade({
   url: "/reviews",
   name: "Reviews",
   isWorkspace: true,
   permissions: "seller:reviews:manage",
   menuItem: {
     title: "RATING.MENU.TITLE",
-    icon: "material-star",
+    icon: "lucide-star",
     priority: 5,
   },
 });
 
-const props = withDefaults(defineProps<Props>(), {
-  expanded: true,
-  closable: true,
-});
-
-defineEmits<Emits>();
-
-const { openBlade, resolveBladeByName } = useBladeNavigation();
-
 const { t } = useI18n({ useScope: "global" });
+const { param, options, openBlade } = useBlade<{ review: CustomerReview }>();
 
-// Data
-
-const { sortExpression, handleSortChange: tableSortHandler } = useTableSort({
+const { sortField, sortOrder, sortExpression } = useDataTableSort({
+  initialField: "createdDate",
   initialDirection: "DESC",
-  initialProperty: "createdDate",
 });
 
 const { loading, reviews, totalCount, pages, currentPage, searchQuery, loadReviews } = useReviews({
@@ -103,119 +117,56 @@ const { loading, reviews, totalCount, pages, currentPage, searchQuery, loadRevie
   sort: sortExpression.value,
 });
 
-// Blade
-const empty = {
-  icon: "material-star",
-  text: computed(() => t("RATING.PAGES.LIST.EMPTY.NO_ITEMS")),
-};
-
-const notfound = {
-  icon: "material-star",
-  text: computed(() => t("RATING.PAGES.LIST.NOT_FOUND.EMPTY")),
-};
-
 const title = t("RATING.PAGES.LIST.TITLE");
-
-const selectedItemId = ref();
-
-const tableColumns = ref<ITableColumns[]>([
-  {
-    id: "title",
-    title: computed(() => t("RATING.PAGES.LIST.TABLE.HEADER.TITLE")),
-    alwaysVisible: true,
-    class: "tw-truncate",
-  },
-  {
-    id: "review",
-    title: computed(() => t("RATING.PAGES.LIST.TABLE.HEADER.REVIEW")),
-    alwaysVisible: false,
-    class: "tw-truncate",
-  },
-  {
-    id: "rating",
-    title: computed(() => t("RATING.PAGES.LIST.TABLE.HEADER.RATING")),
-    alwaysVisible: true,
-    sortable: true,
-    width: 140,
-  },
-  {
-    id: "status",
-    field: "reviewStatus",
-    title: computed(() => t("RATING.PAGES.LIST.TABLE.HEADER.STATUS")),
-    alwaysVisible: true,
-    width: 120,
-  },
-  {
-    id: "createdDate",
-    title: computed(() => t("RATING.PAGES.LIST.TABLE.HEADER.CREATEDDATE")),
-    alwaysVisible: true,
-    sortable: true,
-    type: "date-ago",
-    width: 120,
-  },
-  {
-    id: "createdBy",
-    title: computed(() => t("RATING.PAGES.LIST.TABLE.HEADER.CREATEDBY")),
-    alwaysVisible: true,
-    width: 140,
-  },
-]);
-
-watch(
-  () => props.param,
-  async (newVal) => {
-    if (newVal && props.options) {
-      await onItemClick(props.options.review);
-    }
-  },
-  { immediate: true },
-);
+const selectedItemId = ref<string>();
 
 const bladeToolbar = ref<IBladeToolbar[]>([
   {
     id: "refresh",
-    title: computed(() => t("RATING.PAGES.LIST.TOOLBAR.REFRESH")),
-    icon: "material-refresh",
+    title: t("RATING.PAGES.LIST.TOOLBAR.REFRESH"),
+    icon: "lucide-refresh-cw",
     async clickHandler() {
       await loadReviews(searchQuery.value);
     },
   },
 ]);
 
-async function onItemClick(item: CustomerReview) {
+watch(
+  () => param.value,
+  async (newVal) => {
+    if (newVal && options.value) {
+      await onItemClick({ data: options.value.review });
+    }
+  },
+  { immediate: true },
+);
+
+watch(sortExpression, async () => {
+  await loadReviews(searchQuery.value);
+});
+
+async function onItemClick(event: { data: CustomerReview }) {
+  const item = event.data;
   await openBlade({
-    blade: resolveBladeByName("ReviewDetails"),
+    name: "ReviewDetails",
     param: item.id,
-    onOpen: () => {
+    onOpen() {
       selectedItemId.value = item.id;
     },
-    onClose: () => {
+    onClose() {
       selectedItemId.value = undefined;
     },
   });
 }
 
-const onHeaderClick = (item: ITableColumns) => {
-  tableSortHandler(item.id);
-};
-
-const onPaginationClick = async (page: number) => {
-  currentPage.value = page;
-  await loadReviews(searchQuery.value);
-};
+async function onPaginationClick(page: number) {
+  await loadReviews({
+    ...searchQuery.value,
+    skip: (page - 1) * (searchQuery.value.take ?? 20),
+  });
+}
 
 onMounted(async () => {
   await loadReviews();
-});
-
-watch(
-  () => sortExpression.value,
-  async () => {
-    await loadReviews(searchQuery.value);
-  },
-);
-
-defineExpose({
-  title,
 });
 </script>

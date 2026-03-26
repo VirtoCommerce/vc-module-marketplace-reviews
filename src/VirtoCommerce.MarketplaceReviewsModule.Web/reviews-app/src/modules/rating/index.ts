@@ -1,6 +1,6 @@
 import * as pages from "./pages";
 import * as locales from "./locales";
-import { createAppModule, registerDashboardWidget } from "@vc-shell/framework";
+import { defineAppModule, registerDashboardWidget } from "@vc-shell/framework";
 import { markRaw } from "vue";
 import RatingDashboardCard from "./components/RatingDashboardCard.vue";
 
@@ -12,4 +12,5 @@ registerDashboardWidget({
   size: { width: 6, height: 6 },
 });
 
-export default createAppModule(pages, locales);
+export default defineAppModule({ blades: pages, locales });
+

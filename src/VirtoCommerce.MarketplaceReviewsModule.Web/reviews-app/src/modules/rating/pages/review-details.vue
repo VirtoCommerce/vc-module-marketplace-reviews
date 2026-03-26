@@ -3,14 +3,9 @@
     v-loading="loading"
     :title="title"
     width="30%"
-    :expanded="expanded"
-    :closable="closable"
-    @close="$emit('close:blade')"
-    @expand="$emit('expand:blade')"
-    @collapse="$emit('collapse:blade')"
   >
     <template #actions>
-      <Status :review-status="customerReview.reviewStatus"></Status>
+      <Status :review-status="customerReview.reviewStatus" />
     </template>
     <VcContainer>
       <VcForm>
@@ -55,8 +50,7 @@
               :label="$t('RATING.PAGES.DETAILS.FORM.RATING.LABEL')"
               :placeholder="$t('RATING.PAGES.DETAILS.FORM.RATING.PLACEHOLDER')"
               :model-value="customerReview.rating"
-            >
-            </VcRating>
+            />
           </VcCol>
         </VcRow>
         <VcRow>
@@ -68,8 +62,7 @@
               :placeholder="$t('RATING.PAGES.DETAILS.FORM.REVIEW.PLACEHOLDER')"
               name="name"
               disabled
-            >
-            </VcTextarea>
+            />
           </VcCol>
         </VcRow>
       </VcForm>
@@ -80,42 +73,21 @@
 <script lang="ts" setup>
 import moment from "moment";
 import { computed, onMounted } from "vue";
+import { useBlade } from "@vc-shell/framework";
 import { Status } from "../components";
 import { useReview } from "../composables";
 import { useI18n } from "vue-i18n";
 
-// Page
-
-export interface Props {
-  expanded: boolean;
-  closable: boolean;
-  param?: string;
-}
-
-export interface Emits {
-  (event: "close:blade"): void;
-  (event: "collapse:blade"): void;
-  (event: "expand:blade"): void;
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  expanded: true,
-  closable: true,
-});
-
-defineEmits<Emits>();
-
-defineOptions({
+defineBlade({
   name: "ReviewDetails",
 });
 
 const { t } = useI18n({ useScope: "global" });
+const { param } = useBlade();
 const locale = window.navigator.language;
 
-// Data
 const { review: customerReview, loadReview, loading } = useReview();
 
-// Blade
 const title = computed(() => customerReview.value?.title ?? t("RATING.PAGES.DETAILS.FORM.TITLE.PLACEHOLDER"));
 
 const createdDate = computed(() => {
@@ -124,12 +96,8 @@ const createdDate = computed(() => {
 });
 
 onMounted(async () => {
-  if (props.param) {
-    await loadReview(props.param);
+  if (param.value) {
+    await loadReview(param.value);
   }
-});
-
-defineExpose({
-  title,
 });
 </script>

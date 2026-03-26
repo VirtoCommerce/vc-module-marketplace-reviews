@@ -9,7 +9,6 @@ import { bootstrap } from "./bootstrap";
 // Load required CSS
 import "@vc-shell/framework/dist/index.css";
 
-
 async function startApp() {
   const { loadUser } = useUser();
   await loadUser();
@@ -25,7 +24,7 @@ async function startApp() {
         fallbackLocale: import.meta.env.APP_I18N_FALLBACK_LOCALE,
       },
     })
-    .use(Reviews, { router })
+    .use(Reviews)
     .use(router);
 
   Object.entries(locales).forEach(([key, message]) => {
