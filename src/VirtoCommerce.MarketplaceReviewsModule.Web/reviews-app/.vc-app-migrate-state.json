@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "fromVersion": "2.0.0-alpha.28",
+  "toVersion": "2.0.1",
+  "completedAt": "2026-04-27T06:52:06Z",
+  "topics": {
+    "use-data-table-pagination-audit": {
+      "status": "completed",
+      "affectedFiles": [
+        "src/modules/rating/pages/review-list.vue",
+        "src/modules/rating/composables/useReviews/index.ts"
+      ],
+      "commit": "5e55cf3",
+      "completedAt": "2026-04-27T06:52:06Z"
+    },
+    "manual-migration-audit": {
+      "status": "completed",
+      "affectedFiles": [
+        "src/modules/rating/pages/review-details.vue"
+      ],
+      "commit": "1c44389",
+      "completedAt": "2026-04-27T06:52:06Z"
+    },
+    "shims-to-globals": {
+      "status": "no-action",
+      "note": "Informational warning — tsconfig.json already has @vc-shell/framework/globals in types."
+    }
+  },
+  "postMigrationFixes": {
+    "src/main.ts": "Removed platformUrl, cast i18n env vars to string",
+    "src/modules/rating/components/Status.vue": "Renamed CustomerReviewReviewStatus → CustomerReviewStatus"
+  },
+  "apiClientsRegenerated": true,
+  "apiTypeStyle": "Interface"
+}
