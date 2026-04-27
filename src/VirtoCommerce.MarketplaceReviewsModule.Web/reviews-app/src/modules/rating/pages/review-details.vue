@@ -1,8 +1,5 @@
 <template>
-  <VcBlade
-    v-loading="loading"
-    :title="title"
-    width="30%"
+  <VcBlade :loading="loading" :title="title" width="30%"
   >
     <template #actions>
       <Status :review-status="customerReview.reviewStatus" />
@@ -71,12 +68,13 @@
 </template>
 
 <script lang="ts" setup>
-import moment from "moment";
 import { computed, onMounted } from "vue";
-import { useBlade } from "@vc-shell/framework";
+import { formatDateWithPattern, useBlade } from "@vc-shell/framework";
 import { Status } from "../components";
 import { useReview } from "../composables";
 import { useI18n } from "vue-i18n";
+
+import { VcBlade, VcCol, VcContainer, VcForm, VcLabel, VcRating, VcRow, VcTextarea } from "@vc-shell/framework/ui";
 
 defineBlade({
   name: "ReviewDetails",
@@ -92,7 +90,7 @@ const title = computed(() => customerReview.value?.title ?? t("RATING.PAGES.DETA
 
 const createdDate = computed(() => {
   const date = new Date(customerReview.value?.createdDate ?? "");
-  return moment(date).locale(locale).format("L LT");
+  return formatDateWithPattern(date, "L LT", locale);
 });
 
 onMounted(async () => {
