@@ -4,9 +4,13 @@ import {
   SearchCustomerReviewsQuery,
   SearchCustomerReviewsResult,
   VcmpReviewsClient,
-  ISearchCustomerReviewsQuery,
 } from "@vcmp-marketplace-reviews/api/marketplacereviews";
-import { useApiClient, useAsync } from "@vc-shell/framework";
+import {
+  useApiClient,
+  useAsync,
+  useDataTablePagination,
+  type UseDataTablePaginationReturn,
+} from "@vc-shell/framework";
 import { useRoute } from "vue-router";
 
 interface IUseReviewsOptions {
@@ -17,11 +21,9 @@ interface IUseReviews {
   loading: Ref<boolean>;
   reviews: Ref<CustomerReview[]>;
   customerReview: Ref<CustomerReview>;
-  totalCount: Ref<number>;
-  pages: Ref<number>;
-  currentPage: Ref<number>;
-  searchQuery: Ref<ISearchCustomerReviewsQuery>;
-  loadReviews: (query?: ISearchCustomerReviewsQuery) => Promise<void>;
+  pagination: UseDataTablePaginationReturn;
+  searchQuery: Ref<SearchCustomerReviewsQuery>;
+  loadReviews: (query?: SearchCustomerReviewsQuery) => Promise<void>;
 }
 
 const { getApiClient } = useApiClient(VcmpReviewsClient);
@@ -30,7 +32,7 @@ export default (options?: IUseReviewsOptions): IUseReviews => {
   const route = useRoute();
 
   const pageSize = options?.pageSize || 20;
-  const searchQuery = ref<ISearchCustomerReviewsQuery>({
+  const searchQuery = ref<SearchCustomerReviewsQuery>({
     take: pageSize,
     skip: 0,
     sort: options?.sort || "createdDate:DESC",
@@ -38,11 +40,11 @@ export default (options?: IUseReviewsOptions): IUseReviews => {
 
   const searchResult = ref<SearchCustomerReviewsResult>();
 
-  const customerReview = ref(new CustomerReview());
+  const customerReview = ref({} as CustomerReview);
 
-  const { action: loadReviews, loading } = useAsync<ISearchCustomerReviewsQuery>(async (query) => {
+  const { action: loadReviews, loading } = useAsync<SearchCustomerReviewsQuery>(async (query) => {
     const sellerId = await GetSellerId();
-    const command = new SearchCustomerReviewsQuery({ ...query, sellerId: sellerId });
+    const command = { ...query, sellerId: sellerId } as SearchCustomerReviewsQuery;
 
     searchResult.value = await (await getApiClient()).searchCustomerReviews(command);
   });
@@ -54,17 +56,18 @@ export default (options?: IUseReviewsOptions): IUseReviews => {
 
   // Computed properties
   const items = computed(() => searchResult.value?.results || []);
-  const totalCount = computed(() => searchResult.value?.totalCount || 0);
-  const pages = computed(() => Math.ceil(totalCount.value / pageSize));
-  const currentPage = computed(() => Math.floor((searchQuery.value.skip || 0) / pageSize) + 1);
+
+  const pagination = useDataTablePagination({
+    pageSize,
+    totalCount: computed(() => searchResult.value?.totalCount ?? 0),
+    onPageChange: ({ skip }) => loadReviews({ ...searchQuery.value, skip }),
+  });
 
   return {
     reviews: items,
     loading: computed(() => loading.value),
     customerReview: computed(() => customerReview.value),
-    totalCount,
-    pages,
-    currentPage,
+    pagination,
     searchQuery,
     loadReviews,
   };

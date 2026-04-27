@@ -1,8 +1,5 @@
 <template>
-  <VcBlade
-    :title="title"
-    :toolbar-items="bladeToolbar"
-    width="70%"
+  <VcBlade :title="title" :toolbar-items="bladeToolbar" width="70%"
   >
     <VcDataTable
       v-model:active-item-id="selectedItemId"
@@ -11,8 +8,8 @@
       class="tw-w-full tw-h-full tw-box-border"
       :loading="loading"
       :items="reviews ?? []"
-      :total-count="totalCount"
-      :pagination="{ currentPage, pages }"
+      :total-count="pagination.totalCount"
+      :pagination="pagination"
       :total-label="$t('RATING.REVIEW_TABLE.TOTALS')"
       :pull-to-refresh="true"
       :empty-state="{
@@ -25,7 +22,7 @@
       }"
       state-key="review_table"
       @row-click="onItemClick"
-      @pagination-click="onPaginationClick"
+      @pagination-click="pagination.goToPage"
       @pull-refresh="loadReviews"
     >
       <VcColumn
@@ -92,6 +89,8 @@ import { useReviews } from "../composables";
 import { Status } from "../components";
 import { useI18n } from "vue-i18n";
 
+import { VcBlade, VcColumn, VcDataTable, VcRating } from "@vc-shell/framework/ui";
+
 defineBlade({
   url: "/reviews",
   name: "Reviews",
@@ -112,7 +111,7 @@ const { sortField, sortOrder, sortExpression } = useDataTableSort({
   initialDirection: "DESC",
 });
 
-const { loading, reviews, totalCount, pages, currentPage, searchQuery, loadReviews } = useReviews({
+const { loading, reviews, pagination, searchQuery, loadReviews } = useReviews({
   pageSize: 20,
   sort: sortExpression.value,
 });
@@ -156,13 +155,6 @@ async function onItemClick(event: { data: CustomerReview }) {
     onClose() {
       selectedItemId.value = undefined;
     },
-  });
-}
-
-async function onPaginationClick(page: number) {
-  await loadReviews({
-    ...searchQuery.value,
-    skip: (page - 1) * (searchQuery.value.take ?? 20),
   });
 }
 
