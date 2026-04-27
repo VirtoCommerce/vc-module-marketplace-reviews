@@ -2,12 +2,27 @@
   "name": "@vcmp-marketplace-reviews/api",
   "version": "0.0.0",
   "files": [
+    "dist",
     "package.json"
   ],
   "exports": {
     "./marketplacereviews": {
-      "import": "./virtocommerce.marketplacereviews.js",
-      "types": "./types/virtocommerce.marketplacereviews.js"
+      "import": "./dist/virtocommerce.marketplacereviews.js",
+      "types": "./dist/types/virtocommerce.marketplacereviews.d.ts"
+    },
+    "./virtocommerce.marketplacereviews": {
+      "import": "./dist/virtocommerce.marketplacereviews.js",
+      "types": "./dist/types/virtocommerce.marketplacereviews.d.ts"
+    },
+    ".": {
+      "import": "./dist/virtocommerce.marketplacereviews.js",
+      "types": "./dist/types/virtocommerce.marketplacereviews.d.ts"
     }
-  }
+  },
+  "apiClientGenerator": {
+    "version": "1.1.1",
+    "generatedAt": "2026-04-27T06:35:50.954Z"
+  },
+  "module": "./dist/virtocommerce.marketplacereviews.js",
+  "types": "./dist/types/virtocommerce.marketplacereviews.d.ts"
 }

@@ -9,12 +9,12 @@
 </template>
 
 <script lang="ts" setup>
-import { VcStatus } from "@vc-shell/framework";
+import { VcStatus } from "@vc-shell/framework/ui";
 import { computed } from "vue";
-import { CustomerReviewReviewStatus } from "@vcmp-marketplace-reviews/api/marketplacereviews";
+import { CustomerReviewStatus } from "@vcmp-marketplace-reviews/api/marketplacereviews";
 
 export interface Props {
-  reviewStatus: CustomerReviewReviewStatus;
+  reviewStatus: CustomerReviewStatus;
 }
 
 const props = defineProps<Props>();
@@ -22,17 +22,16 @@ const props = defineProps<Props>();
 const status = computed(() => {
   let status = undefined;
   switch (props.reviewStatus) {
-    case CustomerReviewReviewStatus.New:
+    case CustomerReviewStatus.New:
       status = "warning" as const;
       break;
-    case CustomerReviewReviewStatus.Approved:
+    case CustomerReviewStatus.Approved:
       status = "success" as const;
       break;
-    case CustomerReviewReviewStatus.Rejected:
+    case CustomerReviewStatus.Rejected:
       status = "danger" as const;
       break;
   }
   return status;
 });
-
 </script>

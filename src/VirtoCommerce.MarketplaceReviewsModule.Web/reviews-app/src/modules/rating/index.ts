@@ -13,4 +13,3 @@ registerDashboardWidget({
 });
 
 export default defineAppModule({ blades: pages, locales });
-

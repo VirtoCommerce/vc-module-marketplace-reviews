@@ -1,5 +1,8 @@
 <template>
-  <VcBlade :loading="loading" :title="title" width="30%"
+  <VcBlade
+    :loading="loading"
+    :title="title"
+    width="30%"
   >
     <template #actions>
       <Status :review-status="customerReview.reviewStatus" />

@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts" setup>
-import { VcRating } from "@vc-shell/framework";
+import { VcRating, vLoading } from "@vc-shell/framework/ui";
 import { onMounted } from "vue";
 import { useRating } from "../composables";
 

@@ -1,5 +1,8 @@
 <template>
-  <VcBlade :title="title" :toolbar-items="bladeToolbar" width="70%"
+  <VcBlade
+    :title="title"
+    :toolbar-items="bladeToolbar"
+    width="70%"
   >
     <VcDataTable
       v-model:active-item-id="selectedItemId"

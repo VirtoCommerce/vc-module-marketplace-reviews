@@ -17,7 +17,7 @@ export default () => {
       return;
     }
 
-    const command = new SearchCustomerReviewsQuery({ sellerId: sellerId, objectIds: [_id] });
+    const command = { sellerId: sellerId, objectIds: [_id] } as SearchCustomerReviewsQuery;
 
     review.value = (await getApiClient())
       .searchCustomerReviews(command)

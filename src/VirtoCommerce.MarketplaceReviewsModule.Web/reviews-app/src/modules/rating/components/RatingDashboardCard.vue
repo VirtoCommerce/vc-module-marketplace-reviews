@@ -5,7 +5,7 @@
     :loading="loading"
   >
     <template
-      v-if="$isDesktop.value"
+      v-if="isDesktop"
       #actions
     >
       <div class="vc-rating-widget__actions">
@@ -80,12 +80,16 @@
 </template>
 
 <script setup lang="ts">
-import { useBlade, DashboardWidgetCard } from "@vc-shell/framework";
+import { useBlade, DashboardWidgetCard, useResponsive } from "@vc-shell/framework";
 import Rating from "./Rating.vue";
 import { CustomerReview } from "@vcmp-marketplace-reviews/api/marketplacereviews";
 import { useReviews } from "../composables";
 import { onMounted } from "vue";
 import { useI18n } from "vue-i18n";
+
+import { VcButton, VcColumn, VcDataTable } from "@vc-shell/framework/ui";
+
+const { isDesktop } = useResponsive();
 
 const { openBlade } = useBlade();
 const { t } = useI18n({ useScope: "global" });

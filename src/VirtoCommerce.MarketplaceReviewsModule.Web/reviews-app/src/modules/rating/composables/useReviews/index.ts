@@ -5,12 +5,7 @@ import {
   SearchCustomerReviewsResult,
   VcmpReviewsClient,
 } from "@vcmp-marketplace-reviews/api/marketplacereviews";
-import {
-  useApiClient,
-  useAsync,
-  useDataTablePagination,
-  type UseDataTablePaginationReturn,
-} from "@vc-shell/framework";
+import { useApiClient, useAsync, useDataTablePagination, type UseDataTablePaginationReturn } from "@vc-shell/framework";
 import { useRoute } from "vue-router";
 
 interface IUseReviewsOptions {
