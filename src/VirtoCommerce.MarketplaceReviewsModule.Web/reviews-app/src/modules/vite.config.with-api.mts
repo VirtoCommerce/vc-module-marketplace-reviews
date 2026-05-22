@@ -1,8 +1,15 @@
+import { fileURLToPath } from "node:url";
+import path from "node:path";
 import { getDynamicModuleConfiguration } from "@vc-shell/mf-module";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// vite.config sits at reviews-app/src/modules/, .NET module root is three levels up.
+const moduleRoot = path.resolve(__dirname, "../../..");
 
 export default getDynamicModuleConfiguration({
   entry: "./src/modules/index.ts",
-  compatibility: {
-    framework: "^1.2.4",
-  },
+  appId: "vendor-portal",
+  moduleRoot,
+  remoteName: "VirtoCommerce.MarketplaceReviews",
 });
