@@ -22,10 +22,15 @@
   </ItemGroup>
   <ItemGroup>
     <ReviewsApp Include="reviews-app\dist\**" />
+    <!-- MF plugin remote produced by `yarn build:modules-bundle` lands at
+         <moduleRoot>/plugins/<appId>/ — the platform's manifest endpoint
+         (GET /api/apps/<appId>/manifest) discovers remoteEntry.js there. -->
+    <PluginRemotes Include="plugins\**" />
   </ItemGroup>
   <Target Name="CopyCustomContentOnPublish" AfterTargets="Publish">
     <Copy SourceFiles="@(ReviewsApp)" DestinationFiles="$(PublishDir)\..\%(Identity)" />
     <Copy SourceFiles="@(ReviewsAppNew)" DestinationFiles="$(PublishDir)\..\%(Identity)" />
+    <Copy SourceFiles="@(PluginRemotes)" DestinationFiles="$(PublishDir)\..\plugins\%(RecursiveDir)%(Filename)%(Extension)" />
   </Target>
   <ItemGroup>
     <Folder Include="Scripts\blades\" />
