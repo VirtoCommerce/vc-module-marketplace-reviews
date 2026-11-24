@@ -1,0 +1,26 @@
+{
+  "MARKETPLACE_REVIEWS": {
+    "TOOLBAR": {
+      "REFRESH": "Refresh"
+    },
+    "WIDGET": {
+      "TITLE": "Rating (no reviews) | Rating ({n} review) | Rating ({n} reviews)"
+    },
+    "REVIEWS": {
+      "TITLE": "Rating and reviews",
+      "EMPTY": "No reviews yet",
+      "STATUS_PLACEHOLDER": "All statuses",
+      "REVIEW": "Review",
+      "RATING": "Rating",
+      "CREATED": "Created",
+      "STATUS": "Status",
+      "CREATED_BY": "Author",
+      "STORE": "Store"
+    },
+    "STATUSES": {
+      "New": "New",
+      "Approved": "Approved",
+      "Rejected": "Rejected"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "remote": { "name": "marketplace_reviews_admin", "exposed": "./Module" },
+  "contributions": {
+    "menu": []
+  }
+}
