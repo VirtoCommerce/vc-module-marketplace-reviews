@@ -29,7 +29,7 @@
     </SonarQubeSetting>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VirtoCommerce.MarketplaceVendorModule.Data" Version="3.1000.0" />
+    <PackageReference Include="VirtoCommerce.MarketplaceVendorModule.Data" Version="3.1002.0-alpha.1040" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VirtoCommerce.MarketplaceReviewsModule.Core\VirtoCommerce.MarketplaceReviewsModule.Core.csproj" />
